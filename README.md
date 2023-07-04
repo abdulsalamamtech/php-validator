@@ -4,24 +4,24 @@ PHP Validator is a PHP OOP framework
 that helps in validating users input 
 and prevent sql injection
 
-===
+=====
 
 **How to use PHP Validator**
 
 Directory:
 
-validator
-    validate.php
-yourproject.php
+>validator
+>> validate.php
+>>yourproject.php
 
-```
+```php
 <?php
 
 <!-- INCLUDE VALIDATOR TO YOUR PROJECT -->
 include(validator/validate.php);
 
 <!-- YOUR VARIABLE -->
-$var = "amtech digital";
+$var = "abdulsalam amtech";
 
 <!-- INITIALIZE YOUR CLASS -->
 $validator = new Validator();
@@ -52,17 +52,17 @@ $decode_value = $validator->validOutput($var);
 ?>
 ```
 
-===
+=====
 
 **Contribution**
 
-You are free to use and contribute to this project
+You are free to use and contribute to this project.
 
-===
+=====
 
  **About this project**
 
- This project has custumers page and admin page
+ This project is only for PHP validation.
 
 You can check out my github for more intresting project.
-For details [Visit My github Page](https://github.com/abdulsalamamtech).
+For details :octocat: [Visit My github Page](https://github.com/abdulsalamamtech).
