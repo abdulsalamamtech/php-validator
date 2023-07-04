@@ -44,12 +44,12 @@ $var_error_message = $validator->inputErrorMessage();
 $value = $validator->output();
 
 /* THIS RETURN VALIDATED INPUT
-IS RETURN HTML ENTITIES AND CHARACTERS
+IT RETURN HTML ENTITIES AND CHARACTERS
 */
 $encode_value = $validator->validInput($var);
 
 /* THIS RETURN VALID OUTPUT
-IS CONVERT HTML ENTITIES AND CHARACTERS
+IT CONVERT HTML ENTITIES AND CHARACTERS
 */
 $decode_value = $validator->validOutput($var);
 
