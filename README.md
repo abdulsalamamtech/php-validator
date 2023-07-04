@@ -4,15 +4,17 @@ PHP Validator is a PHP OOP framework
 that helps in validating users input 
 and prevent sql injection
 
-=====
+---
 
 **How to use PHP Validator**
 
 Directory:
 
 >validator
+
 >> validate.php
->>yourproject.php
+
+>yourproject.php
 
 ```php
 <?php
@@ -52,13 +54,13 @@ $decode_value = $validator->validOutput($var);
 ?>
 ```
 
-=====
+___
 
 **Contribution**
 
 You are free to use and contribute to this project.
 
-=====
+***
 
  **About this project**
 
