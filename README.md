@@ -65,4 +65,4 @@ You are free to use and contribute to this project.
  This project is only for PHP validation.
 
 You can check out my github for more intresting project.
-For details :octocat: [Visit My github Page](https://github.com/abdulsalamamtech).
+For details [Visit My github Page](https://github.com/abdulsalamamtech) :octocat: .
