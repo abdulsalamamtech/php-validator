@@ -123,4 +123,4 @@ You are free to use and contribute to this project.
  This project is only for PHP validation.
 
 You can check out my github for more intresting project.
-For details [Visit My github Page](https://github.com/abdulsalamamtech) :octocat: .
+For details [Visit My github Page](https://github.com/abdulsalamamtech)  :octocat: .

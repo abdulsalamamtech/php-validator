@@ -1,5 +1,11 @@
 <?php
 
+
+// PHP VALIDATOR NAMESPACE
+namespace PhpValidator;
+
+
+// MY COUNTRY TIME ZONE
 print_r(date_default_timezone_get());
 date_default_timezone_set('Africa/lagos');
 echo "<br>";
@@ -7,15 +13,20 @@ print_r(date_default_timezone_get());
 echo "<br> The time is " . date("D, d F Y, h:i:s a")."<br>";
 
 
-class Validator{
-    private $data;
-    private $data_type;
-    private $input = [];
-    private $output;
 
+
+class Validator{
+    private $input;
+    private $input_type;
+
+    private $error = "false";
+
+    private $error_message = array();
+
+    
     // VERIFY AND ENCODE INPUT
-    private function input(){
-        $data = $this->data;
+    private function encodeInput(){
+        $data = $this->input;
         $data = htmlspecialchars($data);
         $data = htmlentities($data);
         $data = stripslashes($data);
@@ -25,196 +36,152 @@ class Validator{
     }
 
     // VERIFY AND DECODE OUTPUT
-    private function output(){
-        $data = $this->output;
+    private function decodeOutput(){
+        $data = $this->input;
         $data = html_entity_decode($data);
         $data = htmlspecialchars_decode($data);
         
         return $data;
     }
 
-    // RETURN VALID INPUT
-    public function validInput($data, $data_type){
-        $this->data = $data;
-        $this->data_type = $data_type;
+    // GET INPUT DATA & VALIDATION TYPE
+    public function input($var, $type = "text"){
+        $this->input = $var;
+        $this->input_type = $type;
+        $this->inputType();
+        return $this->input;
+    }
 
-        // VALIDATE BY DATATYPE
-        switch ($this->data_type) {
+    public function output(){
+        return $this->input;
+    }
 
-            // FOR TEXT
-            case 'text':
-                return $this->inputText();
-                break;
+    // YOU CAN INSERT THIS INTO YOUR SQL STATEMENT
+    public function validInput(){
+        return $this->encodeInput();
+    }
 
-            // FOR NUMBER
-            case 'number':
-                return $this->inputNumber();
-                break;
-
-            // FOR EMAIL
-            case 'email':
-                return $this->inputEmail();
-                break;
-
-            // FOR VARCHAR
-            case 'varchar':
-                return $this->inputVarchar();
-                break;
-
-            // FOR TELEPHONE NUMBER
-            case 'tel':
-                return $this->inputTel();
-                break;
-            
-            default:
-                $input['error'] = 'true';
-                $input['message'][] = "Invalid datatype!, enter a valid datatype "
-                    . " e.g (text, varchar, number, email, tel, url, password e.t.c)"
-                    . " i.e \"\$str = new Validator() \n \$mystr = \$str->validInput('value', 'text') \"";
-                break;
+    // YOU CAN DISPLAY THIS VARIABLE ON YOUR HTML PAGE
+    public function validOutput($var = ""){
+        if($var !== ""){
+            $this->input = $var;
         }
-
-        // RETURN VALIDATED INPUT
-        return $input;
+        return $this->decodeOutput();
     }
-    // END OF RETURN VALID INPUT
 
-
-    // RETURN VALID OUTPUT
-    public function validOutput($data){
-        $this->output = $data;
-        return $this->output();
+    // CHECK FOR ERROR TRUE/FALSE
+    public function error(){
+        if(is_array($this->error_message) 
+        AND count($this->error_message) > 0)
+        {
+            $this->error = "true";
+        }
+        return $this->error;
     }
-    // END OF RETURN VALID INPUT
 
+    // COUNT THE NUMBER OF ERROR
+    public function errorCount(){
+        return count($this->error_message);
+    }
 
-    // VALIDATING TEXT
-    private function inputText(){
-        $data = $this->data;
-        $input = $this->input;
+    // RETURN THE ERROR MESSAGE IN STRING FORMART
+    public function errorMessage(){
+        $all_error = "";
+        foreach($this->error_message as $err){
+            $all_error .= $err . "<br>";
+        }
+        return $all_error;
+    }
+
+    // RETURN THE ERROR MESSAGE IN ARRAY FORMART
+    public function errorMessageArray(){
+        return $this->error_message;
+    }
+
+    // VALIDATE ACCOUNDING TO YOUR INPUT DATA TYPE
+    private function inputType(){
+        $data = $this->input;
+        $input_type = $this->input_type;
+
+        // THIS CAN ALSO WORK
+        // $error_message = $this->error_message;
+        // $error_message[] = "error message 100";
+        // $error_message[] = "error message 200";
+        // $this->error_message = $error_message;
+
+        // SWITCH FOR THE INPUT DATA TYPE
+        switch($input_type){
+
+            case 'text':
+                $this->inputText();
+                break;
+            case 'number':
+                $this->inputNumber();
+                break;
+            case 'email':
+                $this->inputEmail();
+                break;
+            default:
+                $this->forDefault();
+                break;
+        } 
+
+    }
+
+    // FOR DEFAULT SWITCH CASE
+    private function forDefault(){
+        $this->error = "true";
+        $this->error_message[] = "something went wrong!";
+    }
+
+    function inputText(){
+        $data = $this->input;
 
         // CHECK IF DATA IS EMPTY
-        if(empty($data) OR $data == "")
-        {
-            $input['error'] = 'true';
-            $input['message'][] = "Invalid input field";
-
+        if(empty($data) OR $data == ""){
+            $this->error = "true";
+            $this->error_message[] = "this value is require";
         }
         // CHECK IF DATA IS ALPHABET
-        else if(!preg_match("/^[a-zA-Z ]*$/",$data))
-        {
-            $input['error'] = 'true';
-            $input['message'][] = "value can only be letters";
+        if(!preg_match("/^[a-zA-Z ]*$/",$data)){
+            $this->error = "true";
+            $this->error_message[] = "value can only be letters";
         }
-        else
-        {
-            $input['error'] = 'false';
-            $input['value'] = $this->input();
-        }
-        return $input;
-    }
 
-    // VALIDATING NUMBER
-    private function inputNumber(){
-        $data = $this->data;
-        $input = $this->input;
+    }
+    function inputNumber(){
+        $data = $this->input;
 
         // CHECK IF DATA IS EMPTY
-        if(empty($data) OR $data == "")
-        {
-            $input['error'] = 'true';
-            $input['message'][] = "value is require";
+        if(empty($data) OR $data == ""){
+            $this->error = "true";
+            $this->error_message[] = "this value is require";
         }
         // CHECK IF DATA IS NUMBER
-        else if(!preg_match("/^[0-9+]*$/",$data))
-        {
-            $input['error'] = 'true';
-            $input['message'][] = "value can only be numbers";
+        if(!preg_match("/^[0-9+]*$/",$data)){
+            $this->error = "true";
+            $this->error_message[] = "value can only be numbers";
         }
-        else
-        {
-            $input['error'] = 'false';
-            $input['value'] = $this->input();
-        }
-        return $input;
-    }
 
-    // VALIDATING EMAIL
-    private function inputEmail(){
-        $data = $this->data;
-        $input = $this->input;
+    }
+    function inputEmail(){
+        $data = $this->input;
 
         // CHECK IF DATA IS EMPTY
-        if(empty($data) OR $data == "")
-        {
-            $input['error'] = 'true';
-            $input['message'][] = "email is require";
+        if(empty($data) OR $data == ""){
+            $this->error = "true";
+            $this->error_message[] = "email is require";
         }
-        // CHECK IF DATA IS EMAIL
-        else if(!filter_var($data, FILTER_VALIDATE_EMAIL))
-        {
-            $input['error'] = 'true';
-            $input['message'][] = "Invalid email account";
+        // CHECK IF DATA IS NUMBER
+        if(!filter_var($data, FILTER_VALIDATE_EMAIL)){
+            $this->error = "true";
+            $this->error_message[] = "invalid email account";
         }
-        else
-        {
-            $input['error'] = 'false';
-            $input['value'] = $this->input();
-        }
-        return $input;
+
     }
-}
 
-
-
-$text = new Validator();
-$valid_text = $text->validInput("", "email");
-
-// CHECK FOR ERROR MESSAGE
-if($valid_text['error'] === "true"){
-    $var = "";
-    // GET ALL VALUES FROM THE ERROR MESSAGE
-    foreach ($valid_text['message'] as $key => $value){
-        $var  .= $value ."<br>";
-    }
-    echo $var;
 
 }
-// CHECK FOR VALUE
-if(isset($valid_text['value'])){
-    echo $valid_text['value'];
-}
-
-
-$str = new Validator();
-$valid_str = $str->validOutput("<BR><\script><H1>EMAILER</H1>");
-echo $valid_str;
 
 
 ?>
-
-<!-- <pre>
-$name = new Validator();
-$name = $name->input("500", "number");
-
-if(is_array($name) AND $name['error'] == true){
-    $var = "";
-    foreach ($name as $key => $value){
-        $var  .= $value ."<br>";
-    }
-
-}else{
-    echo $name['value']
-}
-
-$name = new Validator();
-$name_input = $name->validInput("amtech", "text");
-$nameError = $name->inputError();
-$name_error_message = $name->inputErrorMessage();
-$name_output = $name->validOutput();
-
-$num = Validator()
-$num = output($var);
-</pre> -->
-
-
