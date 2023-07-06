@@ -119,7 +119,40 @@ echo "My name is " . $name;
 ```
 
 
+***
+
+**Types of data validation types**
+
+*This are the types of data validation you can use*
+
+```php
+
+    $var = "";
+    $type = "";
+
+    $types = [
+        // for text only
+        [] = "text",
+        // for number only
+        [] = "number",
+        // for email
+        [] = "email",
+        // for text and number only
+        [] = "alphanumeric",
+        // for text, numbers, and special characters
+        [] = "varchar",
+        // for password (+234): this must be pass into valid input and output
+        [] = "password"
+    ];
+
+    // INITIALIZING CLASS
+    $validator = new Validator();
+    $input = $validator->input($var. $type);
+
+```
+
 ___
+
 
 **Contribution**
 

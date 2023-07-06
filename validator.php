@@ -14,7 +14,7 @@ echo "The time is " . date("D, d F Y, h:i:s a")."\n";
 
 
 
-
+// PHP VALIDATOR CLASS
 class Validator{
     private $input;
     private $input_type;
@@ -30,10 +30,12 @@ class Validator{
         $data = htmlspecialchars($data);
         $data = htmlentities($data);
         $data = stripslashes($data);
+        $data = strtolower($data);
         $data = trim($data);
         
         return $data;
     }
+
 
     // VERIFY AND DECODE OUTPUT
     private function decodeOutput(){
@@ -125,6 +127,18 @@ class Validator{
             case 'email':
                 $this->inputEmail();
                 break;
+            case 'alphanumeric':
+                $this->inputAlphaNumeric();
+                break;
+            case 'varchar':
+                $this->inputVarchar();
+                break;
+            case 'password':
+                $this->inputPassword();
+                break;
+            case 'tel':
+                $this->inputTel();
+                break;
             default:
                 $this->forDefault();
                 break;
@@ -181,6 +195,87 @@ class Validator{
         if(!filter_var($data, FILTER_VALIDATE_EMAIL)){
             $this->error = "true";
             $this->error_message[] = "invalid email account";
+        }
+
+    }
+
+    function inputAlphaNumeric(){
+        $data = $this->input;
+
+        // CHECK IF DATA IS EMPTY
+        if(empty($data) OR $data == ""){
+            $this->error = "true";
+            $this->error_message[] = "this value is require";
+        }
+        // CHECK IF DATA IS ALPHABET
+        if(!preg_match("/^[a-zA-Z0-9+. ]*$/",$data)){
+            $this->error = "true";
+            $this->error_message[] = "value can only be letters and numbers";
+        }
+
+    }
+
+    function inputVarchar(){
+        $data = $this->input;
+
+        // CHECK IF DATA IS EMPTY
+        if(empty($data) OR $data == ""){
+            $this->error = "true";
+            $this->error_message[] = "this value is require";
+        }
+        // CHECK IF DATA IS ALPHABET
+        if(!preg_match("/^[a-zA-Z0-9+._-]*$/",$data)){
+            $this->error = "true";
+            $this->error_message[] = "value can only be letters(a-z), 
+                numbers(0-9), underscore(_) & dash(-)";
+        }
+
+    }
+    function inputPassword(){
+        $data = $this->input;
+
+        // CHECK IF DATA IS EMPTY
+        if(empty($data) OR $data == ""){
+            $this->error = "true";
+            $this->error_message[] = "password is require";
+        }
+        if(strlen($data) < 8){
+            $this->error = "true";
+            $this->error_message[] = "password must be at least 8 characters long.";
+        }
+        // CHECK IF DATA IS ALPHABET
+        if(!preg_match("/^[a-zA-Z0-9_-]*$/",$data)){
+            $this->error = "true";
+            $this->error_message[] = "value can only be letters(a-z), 
+                numbers(0-9), underscore(_) & dash(-)";
+        }
+
+    }
+
+    function inputTel(){
+        $data = $this->input;
+
+        // CHECK IF DATA IS EMPTY
+        if(empty($data) OR $data == ""){
+            $this->error = "true";
+            $this->error_message[] = "phone number is require";
+        }
+
+        // CHECK IF DATA IS NUMBER AND LENGTH IS BETWEEN 
+        if(strlen($data) < 7 OR strlen($data) > 15){
+            $this->error = "true";
+            $this->error_message[] = "invalid phone number";
+        }
+
+        // CHECK IF DATA IS NUMBER AND IN THE RIGHT FORMAT
+        // if(!preg_match("/^[+]{1}(?:[0-9\-\(\)\/\.]\s?){6, 15}[0-9]{1}$/", $data)){
+        //     $this->error = "true";
+        //     $this->error_message[] = "invalid phone number format";
+        // }
+        // CHECK IF DATA IS NUMBER AND IN THE RIGHT FORMAT
+        if(!preg_match("/^[+]{1}[0-9+]{1,15}$/", $data)){
+            $this->error = "true";
+            $this->error_message[] = "invalid phone number format";
         }
 
     }
