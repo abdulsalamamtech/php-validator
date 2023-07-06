@@ -13,7 +13,7 @@ Directory:
 
 >validator
 
->> validate.php
+>> validator.php
 
 >yourproject.php
 
@@ -21,7 +21,7 @@ Directory:
 <?php
 
 //INCLUDE VALIDATOR TO YOUR PROJECT
-include(validator/validate.php);
+include(validator/validator.php);
 
 // YOUR VARIABLE
 $var = "Abdulsalam Amtech";
@@ -35,22 +35,32 @@ THIS ALSO RETURN THE EXACT INPUT
 */
 $var = $validator->input($var, "text");
 
-// INPUT ERROR CHECK FOR ANY ERROR
+/* INPUT ERROR CHECK FOR ANY ERROR
+THIS RETURN TRUE/FALSE
+*/
 $var_error = $validator->inputError();
 
-// INPUT ERROR MESSAGE GET ALL THE ERROR MESSAGE
+// COUNT THE NUMBER OF ERROR
+$var_count = $validator->inputCount();
+
+// INPUT ERROR MESSAGE GET ALL THE ERROR MESSAGE IN STRING FORMAT
 $var_error_message = $validator->inputErrorMessage();
+
+// INPUT ERROR MESSAGE GET ALL THE ERROR MESSAGE IN ARRAY FORMAT
+$var_error_message = $validator->inputErrorMessageArray();
 
 // THIS ALSO RETURN THE EXACT INPUT
 $value = $validator->output();
 
 /* THIS RETURN VALIDATED INPUT
 IT RETURN HTML ENTITIES AND CHARACTERS
+THE PARAMETER IS OPTIONAL
 */
 $encode_value = $validator->validInput($var);
 
 /* THIS RETURN VALID OUTPUT
 IT CONVERT HTML ENTITIES AND CHARACTERS
+THE PARAMETER IS OPTIONAL
 */
 $decode_value = $validator->validOutput($var);
 

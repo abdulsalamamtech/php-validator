@@ -2,15 +2,15 @@
 
 
 // PHP VALIDATOR NAMESPACE
-namespace PhpValidator;
+// namespace PhpValidator;
 
 
 // MY COUNTRY TIME ZONE
 print_r(date_default_timezone_get());
 date_default_timezone_set('Africa/lagos');
-echo "<br>";
+echo "\n";
 print_r(date_default_timezone_get());
-echo "<br> The time is " . date("D, d F Y, h:i:s a")."<br>";
+echo "The time is " . date("D, d F Y, h:i:s a")."\n";
 
 
 
@@ -52,12 +52,16 @@ class Validator{
         return $this->input;
     }
 
+    // RETURN THE EXACT INPUT VALUE
     public function output(){
         return $this->input;
     }
 
     // YOU CAN INSERT THIS INTO YOUR SQL STATEMENT
-    public function validInput(){
+    public function validInput($var = ""){
+        if($var !== ""){
+            $this->input = $var;
+        }
         return $this->encodeInput();
     }
 
@@ -133,6 +137,7 @@ class Validator{
         $this->error = "true";
         $this->error_message[] = "something went wrong!";
     }
+
 
     function inputText(){
         $data = $this->input;
