@@ -6,11 +6,10 @@
 
 
 // MY COUNTRY TIME ZONE
-print_r(date_default_timezone_get());
-date_default_timezone_set('Africa/lagos');
-echo "\n";
-print_r(date_default_timezone_get());
-echo "The time is " . date("D, d F Y, h:i:s a")."\n";
+// print_r(date_default_timezone_get());
+// date_default_timezone_set('Africa/lagos');
+// print_r(date_default_timezone_get());
+// echo "The time is " . date("D, d F Y, h:i:s a")."\n";
 
 
 
@@ -267,11 +266,6 @@ class Validator{
             $this->error_message[] = "invalid phone number";
         }
 
-        // CHECK IF DATA IS NUMBER AND IN THE RIGHT FORMAT
-        // if(!preg_match("/^[+]{1}(?:[0-9\-\(\)\/\.]\s?){6, 15}[0-9]{1}$/", $data)){
-        //     $this->error = "true";
-        //     $this->error_message[] = "invalid phone number format";
-        // }
         // CHECK IF DATA IS NUMBER AND IN THE RIGHT FORMAT
         if(!preg_match("/^[+]{1}[0-9+]{1,15}$/", $data)){
             $this->error = "true";
