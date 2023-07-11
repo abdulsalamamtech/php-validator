@@ -230,6 +230,7 @@ class Validator{
         }
 
     }
+    
     function inputPassword(){
         $data = $this->input;
 
