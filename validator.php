@@ -152,7 +152,7 @@ class Validator{
     }
 
 
-    function inputText(){
+    private function inputText(){
         $data = $this->input;
 
         // CHECK IF DATA IS EMPTY
@@ -167,7 +167,7 @@ class Validator{
         }
 
     }
-    function inputNumber(){
+    private function inputNumber(){
         $data = $this->input;
 
         // CHECK IF DATA IS EMPTY
@@ -182,7 +182,7 @@ class Validator{
         }
 
     }
-    function inputEmail(){
+    private function inputEmail(){
         $data = $this->input;
 
         // CHECK IF DATA IS EMPTY
@@ -198,7 +198,7 @@ class Validator{
 
     }
 
-    function inputAlphaNumeric(){
+    private function inputAlphaNumeric(){
         $data = $this->input;
 
         // CHECK IF DATA IS EMPTY
@@ -214,7 +214,7 @@ class Validator{
 
     }
 
-    function inputVarchar(){
+    private function inputVarchar(){
         $data = $this->input;
 
         // CHECK IF DATA IS EMPTY
@@ -231,7 +231,7 @@ class Validator{
 
     }
     
-    function inputPassword(){
+    private function inputPassword(){
         $data = $this->input;
 
         // CHECK IF DATA IS EMPTY
@@ -244,15 +244,15 @@ class Validator{
             $this->error_message[] = "password must be at least 8 characters long.";
         }
         // CHECK IF DATA IS ALPHABET
-        if(!preg_match("/^[a-zA-Z0-9_-]*$/",$data)){
-            $this->error = "true";
-            $this->error_message[] = "value can only be letters(a-z), 
-                numbers(0-9), underscore(_) & dash(-)";
-        }
+        // if(!preg_match("/^[a-zA-Z0-9_-][!@#$%^&*()_+=-><~`]*$/",$data)){
+        //     $this->error = "true";
+        //     $this->error_message[] = "password can only be letters(a-z), 
+        //         numbers(0-9), underscore(_) & special characters";
+        // }
 
     }
 
-    function inputTel(){
+    private function inputTel(){
         $data = $this->input;
 
         // CHECK IF DATA IS EMPTY
