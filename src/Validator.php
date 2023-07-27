@@ -2,15 +2,7 @@
 
 
 // PHP VALIDATOR NAMESPACE
-// namespace PhpValidator;
-// namespace Abdulsalamamtech\PhpValidator
-
-
-// MY COUNTRY TIME ZONE
-// print_r(date_default_timezone_get());
-// date_default_timezone_set('Africa/lagos');
-// print_r(date_default_timezone_get());
-// echo "The time is " . date("D, d F Y, h:i:s a")."\n";
+namespace Abdulsalamamtech\PhpValidator;
 
 
 

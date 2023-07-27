@@ -1,0 +1,16 @@
+{
+    "name": "abdulsalamamtech/php-validator",
+    "description": "PHP Validator is a PHP OOP library that helps in validating users input and prevent sql injection",
+    "type": "library",
+    "homepage": "https://github.com/abdulsalamamtech",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Abdulsalamamtech\\PhpValidator\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php" : "^8.0.0"
+    }
+}
