@@ -3,7 +3,7 @@
 
 // PHP VALIDATOR NAMESPACE
 // namespace PhpValidator;
-// namespace Abdulsalamamtech\PhpValidator
+namespace Abdulsalamamtech\PhpValidator;
 
 
 // MY COUNTRY TIME ZONE
