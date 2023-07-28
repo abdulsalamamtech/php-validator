@@ -9,6 +9,7 @@
             "Abdulsalamamtech\\PhpValidator\\": "src/"
         }
     },
+    "version": "1.0.0",
     "minimum-stability": "dev",
     "require": {
         "php" : "^8.0.0"
