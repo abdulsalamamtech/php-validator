@@ -1,6 +1,6 @@
 **PHP Validator**
 
-PHP Validator is a PHP OOP framework 
+PHP Validator is a PHP OOP library 
 that helps in validating users input 
 and prevent sql injection
 
@@ -156,7 +156,8 @@ ___
 
 **Contribution**
 
-You are free to use and contribute to this project.
+You are free to use and contribute to this project,
+but please make sure you create a new branch.
 
 
 ***
