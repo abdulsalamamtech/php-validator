@@ -9,6 +9,27 @@ and prevent sql injection
 
 **How to use PHP Validator**
 
+
+>>**using composer**
+
+Run this on your terminal
+
+composer require abdulsalamamtech/php-validator
+
+```php
+
+use Abdulsalamamtech\PhpValidator;
+
+// Load composer dependences
+require("./vendor/autoload.php");
+
+$validate = new Validator();
+
+
+```
+
+>>**dowloading the .zip file**
+
 Directory:
 
 >validator
